@@ -1,20 +1,27 @@
+// Home.tsx
 
-
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
   const [numQuestions, setNumQuestions] = useState(10)
   const [difficulty, setDifficulty] = useState('any')
   const [category, setCategory] = useState('any')
+  const [bgColor, setBgColor] = useState('#FFFFFF')
   const navigate = useNavigate()
+
+  useEffect(() => {
+
+    const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`
+    setBgColor(randomColor)
+  }, [])
 
   const handleStartQuiz = () => {
     navigate(`/${numQuestions}/${difficulty}/${category}`)
   }
 
   return (
-    <div className="home">
+    <div className="home" style={{ backgroundColor: bgColor, fontFamily: 'Comic Sans MS, Comic Sans, sans-serif' }}>
       <h2>Welcome to the Trivia Quiz!</h2>
       <p>Select your preferences and start the quiz.</p>
 
@@ -49,7 +56,7 @@ const Home = () => {
             Category:
             <select value={category} onChange={(e) => setCategory(e.target.value)}>
               <option value="any">Any</option>
-              {/* More category options can be added dynamically */}
+              {/* Additional category options could be added here */}
             </select>
           </label>
         </div>
