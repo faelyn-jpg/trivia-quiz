@@ -6,10 +6,14 @@ import {
 } from 'react-router-dom'
 import Home from './components/Home'
 import Layout from './components/Layout'
+import Quiz from './components/Quiz'
+import EndGame from './components/EndGame'
 
 const router = createBrowserRouter(
   createRoutesFromElements(<Route path="/" element={<Layout />} >
-    <Route index element={<Home />} ></Route>
+    <Route index element={<Home />} />
+    <Route path="/:num-questions/:difficulty/:category"element={< Quiz />}/>
+    <Route path="/end/:result"element={< EndGame /> } />
   </Route>)
 )
 

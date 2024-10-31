@@ -1,6 +1,7 @@
 import request from 'superagent'
+import { QuizQuestion } from '../models/quiz'
 
-export async function getGreeting(): Promise<string> {
-  const res = await request.get('/api/v1/greeting')
-  return res.body.greeting
+export async function getQuiz(): Promise<QuizQuestion> {
+  const res = await request.get('https://opentdb.com/api.php?amount=10')
+  return res.body as QuizQuestion
 }
