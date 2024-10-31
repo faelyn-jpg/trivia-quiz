@@ -1,5 +1,6 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
+<<<<<<< HEAD
 @tailwind utilities;
 
 
@@ -43,3 +44,6 @@
     background-color: #0056b3;
   }
   
+=======
+@tailwind utilities; */
+>>>>>>> main

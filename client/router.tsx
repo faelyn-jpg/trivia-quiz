@@ -12,7 +12,7 @@ import EndGame from './components/EndGame'
 const router = createBrowserRouter(
   createRoutesFromElements(<Route path="/" element={<Layout />} >
     <Route index element={<Home />} />
-    <Route path="/:num-questions/:difficulty/:category"element={< Quiz />}/>
+    <Route path="/:numQuestions/:difficulty/:category"element={< Quiz />}/>
     <Route path="/end/:result"element={< EndGame /> } />
   </Route>)
 )
