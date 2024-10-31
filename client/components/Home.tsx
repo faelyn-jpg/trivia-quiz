@@ -1,19 +1,38 @@
-// Home.tsx
+
 
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { getCategories } from '../apiClient'
+
+interface Category {
+  id: number
+  name: string
+}
 
 const Home = () => {
   const [numQuestions, setNumQuestions] = useState(10)
   const [difficulty, setDifficulty] = useState('any')
   const [category, setCategory] = useState('any')
+  const [categories, setCategories] = useState<Category[]>([])
   const [bgColor, setBgColor] = useState('#FFFFFF')
   const navigate = useNavigate()
 
   useEffect(() => {
-
+    
     const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`
     setBgColor(randomColor)
+    
+    
+    async function fetchCategories() {
+      try {
+        const res = await getCategories()
+        setCategories(res.trivia_categories) 
+      } catch (error) {
+        console.error('Failed to fetch categories:', error)
+      }
+    }
+
+    fetchCategories()
   }, [])
 
   const handleStartQuiz = () => {
@@ -56,7 +75,9 @@ const Home = () => {
             Category:
             <select value={category} onChange={(e) => setCategory(e.target.value)}>
               <option value="any">Any</option>
-              {/* Additional category options could be added here */}
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>{cat.name}</option>
+              ))}
             </select>
           </label>
         </div>
