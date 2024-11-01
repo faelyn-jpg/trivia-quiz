@@ -1,13 +1,18 @@
-import React, {useEffect, useState} from 'react'
-type EndGameProps = {
-  score: number
-  totalQuestions: number
-  onRestart: ()=> void
-}
+import {useEffect, useState} from 'react'
+import { Link } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+// type EndGameProps = {
+//   score: number
+//   totalQuestions: number
+// } 
 
-
-const EndGame: React.FC<EndGameProps> = ({score, totalQuestions, onRestart}) => { 
+function EndGame() { 
   const [highScore, setHighScore] = useState<number | null>(null)
+
+  const [searchParams, ] = useSearchParams()
+
+  const score = Number(searchParams.get('score'))
+  const totalQuestions = searchParams.get('numQuestions')
 
   useEffect(() => {
     const savedHighScore = localStorage.getItem('highScore')
@@ -31,9 +36,11 @@ const EndGame: React.FC<EndGameProps> = ({score, totalQuestions, onRestart}) => 
           High Score: {highScore}
         </p>
       )}
-      <button onClick={onRestart} style={{ padding: '10px 20px', marginTop: '20px' }}>
-        Play Again
-      </button>
+      <Link to='/'>
+        <button style={{ padding: '10px 20px', marginTop: '20px' }}>
+          Play Again
+        </button>
+      </Link>
     </div>
   );
 };

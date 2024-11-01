@@ -69,7 +69,7 @@ function QuizPage () {
       }
       {(currentQuestion === Number(numQuestions) - 1) && 
         <div className="multi-choice">
-        <Link to={`/end/${score}`}>
+        <Link to={`/end?score=${score}&numQuestions=${numQuestions}`} >
         {randomlyShuffleAnswers(quizQuestions[currentQuestion].correct_answer, quizQuestions[currentQuestion].incorrect_answers).map((answer, idx) => (
             <button onClick={() => handleClick(quizQuestions[currentQuestion].correct_answer, answer)}key={answer + idx}>{decodeEntities(answer)}</button>
         ))}
